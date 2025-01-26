@@ -13,3 +13,8 @@ export const signInService = async (proxy,email,password) => {
     return false;
 
 }
+
+export const tokenIsValid = async() => {
+    const token = localStorage.getItem('token');
+    return !!token;
+}
