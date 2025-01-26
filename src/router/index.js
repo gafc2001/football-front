@@ -11,6 +11,7 @@ import Competitions from '@/pages/competitions.vue';
 import Home from '@/pages/home.vue';
 import Layout from '@/pages/layout.vue';
 import Login from '@/pages/login.vue';
+import Teams from '@/pages/teams.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
 
 const routes = [
@@ -27,12 +28,17 @@ const routes = [
       {
         path: "",
         name: "home",
+        component : Home,
+      },
+      {
+        path: "competitions",
+        name: "competitions",
         component : Competitions,
       },
       {
-        path: "competions",
-        name: "competions",
-        component : Competitions,
+        path: "teams",
+        name: "teams",
+        component : Teams,
       },
     ]
   },
