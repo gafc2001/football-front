@@ -6,15 +6,57 @@
  */
 
 // Composables
-import Index from '@/pages/index.vue';
+import { tokenIsValid } from '@/app/auth/services';
+import Competitions from '@/pages/competitions.vue';
+import Home from '@/pages/home.vue';
+import Layout from '@/pages/layout.vue';
 import Login from '@/pages/login.vue';
+import Teams from '@/pages/teams.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import { routes } from 'vue-router/auto-routes'
 
+const routes = [
+  {
+      path: "/login",
+      name: "login",
+      component : Login,
+  },
+  {
+    path: "/",
+    name: "/",
+    component : Layout,
+    children : [
+      {
+        path: "",
+        name: "home",
+        component : Home,
+      },
+      {
+        path: "competitions",
+        name: "competitions",
+        component : Competitions,
+      },
+      {
+        path: "teams",
+        name: "teams",
+        component : Teams,
+      },
+    ]
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+})
+
+router.beforeEach(async (to, from) => {
+  const isAuthenticated = await tokenIsValid();
+  if(to.name === 'login' && isAuthenticated){
+    return { name: '/' }
+  }
+  if(to.name !== 'login' && !isAuthenticated){
+    return { name : 'login'}
+  }
 })
 
 // Workaround for https://github.com/vitejs/vite/issues/11804
