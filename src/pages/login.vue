@@ -1,6 +1,7 @@
 <script setup>
-import { reactive, ref } from 'vue';
-
+  import { getCurrentInstance, reactive, ref } from 'vue';
+  import * as AuthService from '@/app/auth/services/index';
+import router from '@/router';
   const rules = [
     v => !!v || 'This camp is required',
   ]
@@ -11,15 +12,20 @@ import { reactive, ref } from 'vue';
   })
 
   const formRef = ref();
+  
 
-  const validate = async() => {
-    const { valid } = await formRef.value.validate()
-    if (valid) alert('Form is valid')
-  }
+  
+  const { proxy } = getCurrentInstance();
 
   const signIn = async() => {
-    alert(1);
-    await validate();
+    const { valid } = await formRef.value.validate()
+
+    if (!valid) return;
+
+    const response = await AuthService.signInService(proxy,formData.email,formData.password);
+    if(response){
+      router.push({path : '/'});
+    }
   }
 </script>
 <template>
@@ -28,15 +34,15 @@ import { reactive, ref } from 'vue';
 
       <v-form ref="formRef">
         <v-text-field
-          :counter="10"
           :rules="rules"
+          v-model="formData.email"
           label="Email"
           required
         ></v-text-field>
 
         <v-text-field
           v-model="formData.password"
-          :counter="10"
+          type="password"
           :rules="rules"
           label="Password"
           required
@@ -46,7 +52,6 @@ import { reactive, ref } from 'vue';
           <v-btn
             class="mt-4"
             color="success"
-            block
             @click="signIn"
           >
             Sign in
