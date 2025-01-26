@@ -7,6 +7,7 @@
 
 // Composables
 import { tokenIsValid } from '@/app/auth/services';
+import Competitions from '@/pages/competitions.vue';
 import Home from '@/pages/home.vue';
 import Layout from '@/pages/layout.vue';
 import Login from '@/pages/login.vue';
@@ -26,7 +27,12 @@ const routes = [
       {
         path: "",
         name: "home",
-        component : Home,
+        component : Competitions,
+      },
+      {
+        path: "competions",
+        name: "competions",
+        component : Competitions,
       },
     ]
   },
