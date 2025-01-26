@@ -18,3 +18,7 @@ export const tokenIsValid = async() => {
     const token = localStorage.getItem('token');
     return !!token;
 }
+
+export const logoutService = async() => {
+    localStorage.removeItem("token");
+}

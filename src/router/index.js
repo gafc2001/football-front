@@ -17,7 +17,7 @@ import { createRouter, createWebHistory } from 'vue-router/auto'
 const routes = [
   {
       path: "/login",
-      name: "/login",
+      name: "login",
       component : Login,
   },
   {
@@ -51,11 +51,11 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   const isAuthenticated = await tokenIsValid();
-  if(to.name === '/login' && isAuthenticated){
+  if(to.name === 'login' && isAuthenticated){
     return { name: '/' }
   }
-  if(to.name !== '/login' && !isAuthenticated){
-    return { name : '/login'}
+  if(to.name !== 'login' && !isAuthenticated){
+    return { name : 'login'}
   }
 })
 
