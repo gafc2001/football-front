@@ -7,11 +7,30 @@
 
 // Composables
 import { tokenIsValid } from '@/app/auth/services';
-import Index from '@/pages/index.vue';
+import Home from '@/pages/home.vue';
+import Layout from '@/pages/layout.vue';
 import Login from '@/pages/login.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
-import { routes } from 'vue-router/auto-routes'
 
+const routes = [
+  {
+      path: "/login",
+      name: "/login",
+      component : Login,
+  },
+  {
+    path: "/",
+    name: "/",
+    component : Layout,
+    children : [
+      {
+        path: "",
+        name: "home",
+        component : Home,
+      },
+    ]
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
