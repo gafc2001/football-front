@@ -7,13 +7,13 @@
 
 // Composables
 import { tokenIsValid } from '@/app/auth/services';
-import Competitions from '@/pages/competitions.vue';
-import Home from '@/pages/home.vue';
+import Competitions from '@/app/competions/pages/competitions.vue';
 import Layout from '@/pages/layout.vue';
-import Login from '@/pages/login.vue';
+import Login from '@/app/auth/pages/login.vue';
 import Teams from '@/app/teams/pages/teams.vue';
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import Team from '@/app/teams/pages/team.vue';
+import Players from '@/app/players/pages/players.vue';
 
 const routes = [
   {
@@ -29,7 +29,7 @@ const routes = [
       {
         path: "",
         name: "home",
-        component : Home,
+        component : Competitions,
       },
       {
         path: "competitions",
@@ -45,6 +45,11 @@ const routes = [
         path: "teams/:id",
         name: "team_detail",
         component : Team,
+      },
+      {
+        path: "players",
+        name: "players",
+        component : Players,
       },
     ]
   },
