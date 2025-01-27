@@ -14,9 +14,7 @@ const logout = async() => {
     <v-navigation-drawer>
         <v-list>
             <v-list-item
-                prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-                subtitle="sandra_a88@gmailcom"
-                title="Sandra Adams"
+                title="Football"
             ></v-list-item>
         </v-list>
 
